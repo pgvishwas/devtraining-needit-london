@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script><![CDATA[function validateComments() {
+	//This script is called when the user clicks "OK" in the dialog window
+	
+	//Make sure there are comments to submit
+	var comments = gel("dialog_comments").value;
+	var ga = new GlideAjax('validateComments'); //Call script include to escape text
+	ga.addParam('sysparm_name', 'validateComments');
+	ga.addParam('sysparm_comments', comments);
+	ga.getXMLWait();
+	comments = ga.getAnswer(); //Set comments to escaped text
+	comments = trim(comments);
+	if (comments == "") {
+		//If comments are empty, alert the user and stop submission
+		alert("Please enter your comments before submitting.");
+		return false;
+	}
+	
+	//If there are comments, close the dialog window and submit them
+	GlideDialogWindow.get().destroy(); //Close the dialog window
+	g_form.setValue("comments", comments); //Set the "Comments" field with comments in the dialog
+}]]></client_script>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_58872_needit_add_comments_dialog.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<g:ui_form>
+  <!-- Get the values from dialog preferences -->
+  <g:evaluate var="jvar_short_text"
+    expression="RP.getWindowProperties.'short_text'" />
+  <g:evaluate var="jvar_comments_text"
+    expression="RP.getWindowProperties.'comments_text'" />
+   <!-- Set up form fields and labels -->
+   <table width="100%">
+     <tr id="description_row" valign="top">
+        <td colspan="2">
+           <!-- Short description value used as a label -->
+           ${jvar_short_text}
+        </td>
+     </tr>
+     <tr>
+       <td>
+         <!-- Comments text field (Contains comments from originating record as a default) -->
+         <g:ui_multiline_input_field name="dialog_comments" id="dialog_comments" label="Additional comments" 
+            value="${jvar_comments_text}" mandatory="true" />
+       </td>
+     </tr>
+     <tr>
+       <td colspan="2">
+       </td>
+     </tr>
+     <tr id="dialog_buttons">
+        <td colspan="2" align="right">
+           <!-- Add OK/Cancel buttons. Clicking OK calls the validateComments script -->
+           <g:dialog_buttons_ok_cancel ok="return validateComments()" ok_type="button" cancel_type="button" />
+        </td>
+     </tr>
+  </table>
+</g:ui_form>
+</j:jelly>]]></html>
+        <name>add_comments_dialog</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-03 12:15:46</sys_created_on>
+        <sys_id>e8bfae3fdbcd3300516984da0b961971</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>add_comments_dialog</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_ui_page_e8bfae3fdbcd3300516984da0b961971</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-03 12:26:08</sys_updated_on>
+    </sys_ui_page>
+</record_update>

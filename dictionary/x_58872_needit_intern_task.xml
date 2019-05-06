@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="live_feed=true" extends="task" label="Intern_Task" max_length="40" name="x_58872_needit_intern_task" type="collection">
+        <element attributes="edge_encryption_enabled=true" dependent="approval_set" dependent_on_field="approval_set" label="Owner" mandatory="true" max_length="40" name="u_owner" type="string" use_dependent_field="true"/>
+    </element>
+</database>

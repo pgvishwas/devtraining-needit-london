@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" extends="planned_task" label="Remediation Task" max_length="40" name="sn_grc_task" sizeclass="1" type="collection">
+        <element attributes="edge_encryption_enabled=true" choice="1" choice_field="added" choice_table="cab_attendee" label="Remediation Response Type" max_length="40" name="x_58872_needit_remediation_response_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Reduce" value="Reduce"/>
+            </choice>
+        </element>
+    </element>
+</database>
